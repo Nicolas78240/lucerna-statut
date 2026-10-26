@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>État du service Lucerna : fonctionnement, panne et incidents</title>
+<meta name="description" content="Lucerna fonctionne-t-il ? État du service en temps réel, panne en cours et historique des incidents. Vos textes restent en sécurité sur votre appareil.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://statut.aumana-studio.com/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f6f3ee" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#181715" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="État du service Lucerna">
+<meta property="og:title" content="État du service Lucerna">
+<meta property="og:description" content="{{OG_DESCRIPTION}}">
+<meta property="og:url" content="https://statut.aumana-studio.com/">
+<script type="application/ld+json">{{JSONLD}}</script>
+<style>
+:root{--bg:#f6f3ee;--pg:#fdfcf9;--ink:#22201c;--ink2:#5d574f;--ln:#e5dfd5;--lnc:#8a8378;--sf:#efebe4;--ac:#2d4a7c;--ok:#2f6b3a;--deg:#8a5a00;--pan:#a3321f;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#181715;--pg:#201f1c;--ink:#ece7de;--ink2:#aca498;--ln:#34312c;--lnc:#7c766e;--sf:#292724;--ac:#93aad8;--ok:#8fcf98;--deg:#e6b65c;--pan:#f0927f;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:var(--ac);text-underline-offset:3px}
+a:focus-visible{outline:2px solid var(--ac);outline-offset:2px;border-radius:2px}
+.lien-evitement{position:absolute;left:-9999px}
+.lien-evitement:focus{left:16px;top:16px;background:var(--pg);padding:8px 12px;z-index:2}
+header,main,footer{max-width:720px;margin:0 auto;padding:0 16px}
+header{padding-top:32px;display:flex;align-items:center;gap:10px}
+header img{width:28px;height:28px}
+header p{margin:0;font-weight:600}
+h1,h2{font-family:"Literata",Georgia,"Times New Roman",serif;font-weight:500;line-height:1.25}
+h1{font-size:30px;margin:24px 0 12px}
+h2{font-size:21px;margin:36px 0 12px}
+.carte{background:var(--pg);border:1px solid var(--ln);border-radius:12px;padding:20px}
+.etat{display:flex;gap:12px;align-items:flex-start;border-left:4px solid var(--c)}
+.etat-ok{--c:var(--ok)}.etat-degrade{--c:var(--deg)}.etat-panne{--c:var(--pan)}
+.pastille{flex:none;width:12px;height:12px;border-radius:50%;background:var(--c);margin-top:8px}
+.etat-panne .pastille{border-radius:2px}
+.etat-degrade .pastille{border-radius:0;transform:rotate(45deg)}
+.etat-corps p{margin:0 0 6px}
+.etat-titre{font-size:20px;font-weight:600}
+.rassurant{background:var(--sf);border-radius:12px;padding:16px 20px;margin-top:16px}
+.rassurant p{margin:0}
+ul.services{list-style:none;margin:0;padding:0}
+ul.services li{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--ln)}
+ul.services li:last-child{border-bottom:0}
+.s-ok{color:var(--ok)}.s-degrade{color:var(--deg)}.s-panne{color:var(--pan)}
+.s-etat{font-weight:600;white-space:nowrap}
+.incident{margin:0 0 12px}
+.incident h3{font-size:17px;margin:0 0 4px}
+.incident p{margin:0 0 4px}
+.meta{color:var(--ink2);font-size:14px}
+.bouton{display:inline-block;margin-top:8px;padding:10px 16px;border-radius:8px;background:var(--ac);color:var(--pg);font-weight:600;text-decoration:none}
+.bouton:hover{filter:brightness(1.08)}
+footer{padding-top:40px;padding-bottom:40px;color:var(--ink2);font-size:14px}
+.pied p{margin:0 0 6px}
+</style>
+</head>
+<body>
+<a class="lien-evitement" href="#contenu">Aller au contenu</a>
+<header>
+<img src="/favicon.svg" alt="" width="28" height="28">
+<p>Lucerna · état du service</p>
+</header>
+<main id="contenu">
+<h1>Lucerna fonctionne-t-il en ce moment ?</h1>
+<section class="carte etat etat-{{ETAT}}" aria-labelledby="etat-titre">
+<span class="pastille" aria-hidden="true"></span>
+<div class="etat-corps">
+<p class="etat-titre" id="etat-titre">{{ETAT_TITRE}}</p>
+<p>{{MESSAGE}}</p>
+<p class="meta">Mis à jour le <time datetime="{{MAJ_ISO}}">{{MAJ_LISIBLE}}</time> (heure de Paris).</p>
+</div>
+</section>
+<div class="rassurant">
+<p><strong>Vos textes sont en sécurité sur votre appareil.</strong> Lucerna garde vos livres sur l’ordinateur ou le smartphone, même quand ses serveurs ne répondent plus. Vous pouvez continuer à écrire : tout se synchronisera au retour du service.</p>
+</div>
+
+<h2>Par service</h2>
+<div class="carte">
+<ul class="services">
+{{SERVICES}}
+</ul>
+</div>
+
+<h2>Incident en cours</h2>
+{{INCIDENTS}}
+
+<h2>Incidents passés</h2>
+{{HISTORIQUE}}
+
+<h2>Retourner écrire</h2>
+<p>Lucerna est une application d’écriture pour les autrices et les auteurs. Elle s’ouvre même pendant une panne, si elle est déjà installée sur l’appareil.</p>
+<a class="bouton" href="https://lucerna.aumana-studio.com/app">Ouvrir Lucerna</a>
+</main>
+<footer class="pied">
+<p>Cette page est hébergée en dehors des serveurs de Lucerna : elle reste lisible pendant une panne.</p>
+<p>Aide : <a href="https://lucerna.aumana-studio.com/aide/demarrer/lucerna-ne-repond-pas">Que faire si Lucerna ne répond pas ?</a> · Site : <a href="https://lucerna.aumana-studio.com/">lucerna.aumana-studio.com</a></p>
+<p>Aucun suivi, aucun cookie sur cette page.</p>
+</footer>
+</body>
+</html>
